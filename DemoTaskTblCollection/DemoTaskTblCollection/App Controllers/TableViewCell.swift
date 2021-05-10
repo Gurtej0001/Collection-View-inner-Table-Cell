@@ -23,6 +23,15 @@ class TableViewCell: UITableViewCell,UITextFieldDelegate {
         // Initialization code
         
     }
+    
+    override func prepareForReuse() {
+        // invoke superclass implementation
+        super.prepareForReuse()
+        
+        
+        
+
+    }
  
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

@@ -22,12 +22,28 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let dict = ["tagNum" : 0, "arrImage" : []] as [String : Any]
+        let dict = ["tagNum" : 0, "arrImage" : [], "textValue":""] as [String : Any]
         let data = ImageModelData.init(data: dict)
         self.arrImages.append(data)
        
     }
 
+    //MARK:- UITextFields Delegates
+    func textFieldDidBeginEditing(_ textField: UITextField) {    //delegate method
+
+    }
+
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {  //delegate method
+        arrImages[textField.tag].textValue = textField.text!
+        return true
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {   //delegate method
+        arrImages[textField.tag].textValue = textField.text!
+      textField.resignFirstResponder()
+
+        return true
+    }
 
     //MARK:- UITableView Delegates
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -55,6 +71,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
         cell.collecViewPics.reloadData()
         cell.txtField.tag = indexPath.row
+        cell.txtField.text = arrImages[indexPath.row].textValue
         cell.txtField.delegate = self
         cell.btnUploadImage.tag = indexPath.row
         cell.btnUploadImage.addTarget(self, action: #selector(btnUploadPicAction(_:)), for: .touchUpInside)
@@ -124,7 +141,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     //MARK:- UIButtons Action
     @IBAction func btnAddPanelAction(_ sender: UIButton){
         arrCount.append("\(sender.tag)")
-        let dict: [String : Any] = ["tagNum" : sender.tag, "arrImage" : []]
+        let dict: [String : Any] = ["tagNum" : sender.tag, "arrImage" : [], "textValue":""]
         let data = ImageModelData.init(data: dict)
         self.arrImages.append(data)
       

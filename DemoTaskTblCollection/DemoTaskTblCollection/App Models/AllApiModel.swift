@@ -10,6 +10,7 @@ import Foundation
 class ImageModelData: NSObject {
     @objc var arrImage = [Any]()
     @objc var tagNum = NSInteger()
+    @objc var textValue = String()
     
     init(data: Dictionary<String,Any>) {
         super.init()
